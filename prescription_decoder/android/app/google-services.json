@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "911761644790",
+    "project_id": "prescriptiondecoder",
+    "storage_bucket": "prescriptiondecoder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911761644790:android:df4ecfe21b9148089e60d7",
+        "android_client_info": {
+          "package_name": "com.example.prescription_decoder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh3zg3_hjPT9wBozUYmuyoY9MKho31giU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
