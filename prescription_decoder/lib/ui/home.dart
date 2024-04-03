@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:prescription_decoder/ui/scan.dart';
+import 'package:prescription_decoder/ui/data.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -19,15 +19,14 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: [
-          // Buttons: History and Medication
           const SizedBox(
-            height:30,
+            height: 30,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0), // Add padding here
+                padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () {
                     // Handle history button press
@@ -36,39 +35,36 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0), // Add padding here
+                padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle history button press
+                    // Handle medication button press
                   },
                   child: const Text('Current Medication'),
                 ),
               ),
             ],
           ),
-          // List of rows
-          // Image capture/upload button
           const SizedBox(
-            height:100,
+            height: 100,
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
-                width: 200, // Adjust width as needed
-                height: 50, // Adjust height as needed
+                width: 200,
+                height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const CameraPage()));
+                          builder: (context) => Data()));
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0), // Rounded edges
                     ), 
                     backgroundColor: Colors.teal, // Teal color
-                    
                     elevation: 4, // Elevation
                   ),
                   child: const Text(

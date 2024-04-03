@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "D:/BeyondTheLoop/PrescriptionDecoder-BeyondTheLoop/prescription_decoder/linux"
+    "cmake.sourceDirectory": "D:/BeyondTheLoop/PrescriptionDecoder-BeyondTheLoop/prescription_decoder/linux",
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

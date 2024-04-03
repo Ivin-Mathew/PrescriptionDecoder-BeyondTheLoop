@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCD3DwVenFgaOgyA-aMu0bnENPcSXWwpjo',
-    appId: '1:911761644790:web:636f5bdea85ec0829e60d7',
-    messagingSenderId: '911761644790',
-    projectId: 'prescriptiondecoder',
-    authDomain: 'prescriptiondecoder.firebaseapp.com',
-    storageBucket: 'prescriptiondecoder.appspot.com',
-    measurementId: 'G-VYE7VHCVK9',
+    apiKey: 'AIzaSyBtN4cow0H5Zct95vjlJf2z2dasLyJVud0',
+    appId: '1:509561488660:web:e89c35138d271f2a23ae01',
+    messagingSenderId: '509561488660',
+    projectId: 'prescriptiondecoder-61160',
+    authDomain: 'prescriptiondecoder-61160.firebaseapp.com',
+    storageBucket: 'prescriptiondecoder-61160.appspot.com',
+    measurementId: 'G-PY0724QW52',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAh3zg3_hjPT9wBozUYmuyoY9MKho31giU',
-    appId: '1:911761644790:android:df4ecfe21b9148089e60d7',
-    messagingSenderId: '911761644790',
-    projectId: 'prescriptiondecoder',
-    storageBucket: 'prescriptiondecoder.appspot.com',
+    apiKey: 'AIzaSyD_JrGeumn5P8t-0r_l_qGWJaolpyIVngc',
+    appId: '1:509561488660:android:9e16fdac16db4c8e23ae01',
+    messagingSenderId: '509561488660',
+    projectId: 'prescriptiondecoder-61160',
+    storageBucket: 'prescriptiondecoder-61160.appspot.com',
   );
 }
