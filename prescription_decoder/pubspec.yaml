@@ -15,9 +15,9 @@ dependencies:
   flutter:
     sdk: flutter
   image_picker: ^1.0.7
-
   firebase_core: any
-  image_picker: ^1.0.7
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
