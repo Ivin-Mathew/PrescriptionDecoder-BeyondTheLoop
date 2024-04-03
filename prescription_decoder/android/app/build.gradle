@@ -4,8 +4,6 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-def kotlin_version = "1.9.23" // Define Kotlin version here
-
 // Rest of your code remains unchanged
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
