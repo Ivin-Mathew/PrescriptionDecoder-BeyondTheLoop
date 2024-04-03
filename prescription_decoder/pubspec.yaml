@@ -7,6 +7,10 @@ environment:
   sdk: '>=3.3.2 <4.0.0'
 
 dependencies:
+  firebase_auth: ^4.19.0
+  firebase_ui_auth: ^1.13.1
+  cupertino_icons: ^1.0.6
+  modal_progress_hud_nsn: ^0.5.1
   flutter:
     sdk: flutter
 
