@@ -4,11 +4,11 @@ import 'package:prescription_decoder/ui/login.dart';
 import 'firebase_options.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // Initialize Firebase asynchronously
   Future<FirebaseApp> _initializeFirebase() async {
@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
         future: _initializeFirebase(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return HomePage();
+            return const HomePage();
           }
-          return Scaffold(
+          return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         },
@@ -37,11 +37,11 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: LoginScreen(),
     );
   }

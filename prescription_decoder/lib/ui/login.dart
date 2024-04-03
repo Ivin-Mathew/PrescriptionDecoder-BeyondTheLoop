@@ -6,15 +6,15 @@ import 'package:prescription_decoder/ui/signup.dart';
 
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   // Function to handle login
   static Future<User?> loginUsingEmailPassword(
@@ -38,19 +38,19 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 234, 234, 234), // Background color
+      backgroundColor: const Color.fromARGB(255, 234, 234, 234), // Background color
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
-          color: Color.fromARGB(255, 234, 234, 234), // Color for the container holding content
+          color: const Color.fromARGB(255, 234, 234, 234), // Color for the container holding content
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
-              Text(
+              const Text(
                 "Log In",
                 style: TextStyle(
                   color: Colors.black,
@@ -58,13 +58,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 44.0,
               ),
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: "User Email",
                     prefixIcon: Icon(Icons.mail, color: Colors.black)),
               ),
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: "Password",
                     prefixIcon: Icon(Icons.password, color: Colors.black)),
               ),
@@ -85,10 +85,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => RegistrationScreen()),
+                    MaterialPageRoute(builder: (context) => const RegistrationScreen()),
                   );
                 },
-                child: Text(
+                child: const Text(
                   "Not registered? Sign Up!!",
                   style: TextStyle(color: Colors.blue),
                 ),
@@ -96,12 +96,12 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 88.0,
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: RawMaterialButton(
-                  fillColor: Color(0xFF0069FE),
+                  fillColor: const Color(0xFF0069FE),
                   elevation: 0.0,
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0)),
                   onPressed: () async {
@@ -111,20 +111,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         context: context);
                     if (user != null) {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => Home()));
+                          builder: (context) => const Home()));
                     } else {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Error"),
-                            content: Text("Invalid username or password."),
+                            title: const Text("Error"),
+                            content: const Text("Invalid username or password."),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text("OK"),
+                                child: const Text("OK"),
                               ),
                             ],
                           );
@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     }
                   },
-                  child: Text("Login",
+                  child: const Text("Login",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,

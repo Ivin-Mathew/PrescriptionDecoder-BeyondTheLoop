@@ -41,13 +41,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New User Registration'),
+        title: const Text('New User Registration'),
       ),
       backgroundColor: Colors.white,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,7 +65,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   hintText: 'Enter your email',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8.0,
               ),
               TextField(
@@ -81,7 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   hintText: 'Enter your Password',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24.0,
               ),
               Container(
@@ -103,11 +103,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               email: email,
                               password: password,
                             );
-                            if (newUser != null) {
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                              builder: (context) => Home()));
-                            }
-                          } catch (e) {
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const Home()));
+                                                    } catch (e) {
                             print(e);
                           }
                           setState(() {
@@ -115,7 +113,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           });
                         }
                       : null, // Set onPressed to null when button is disabled
-                  child: Text(
+                  child: const Text(
                     'Register',
                     style: TextStyle(color: Colors.white),
                   ),
