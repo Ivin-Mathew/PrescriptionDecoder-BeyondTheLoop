@@ -51,14 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 10.0,
               ),
               Text(
-                "Cool Rides",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 13, 0, 96),
-                  fontSize: 44.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
                 "Log In",
                 style: TextStyle(
                   color: Colors.black,
