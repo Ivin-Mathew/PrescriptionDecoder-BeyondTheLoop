@@ -1,16 +1,23 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+<<<<<<< Updated upstream
 import 'package:path_provider/path_provider.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
+=======
+
+class CameraPage extends StatefulWidget {
+  const CameraPage({super.key});
+>>>>>>> Stashed changes
 
   @override
   _CameraPageState createState() => _CameraPageState();
 }
 
 class _CameraPageState extends State<CameraPage> {
+<<<<<<< Updated upstream
   late File _imageFile = File('');
 
   Future<void> _captureImage(ImageSource source) async {
@@ -32,6 +39,20 @@ class _CameraPageState extends State<CameraPage> {
   }
 }
 
+=======
+  File? _imageFile;
+
+  Future<void> _captureImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
+
+    if (image != null) {
+      setState(() {
+        _imageFile = File(image.path);
+      });
+    }
+  }
+>>>>>>> Stashed changes
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +64,7 @@ class _CameraPageState extends State<CameraPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+<<<<<<< Updated upstream
             _imageFile == null || _imageFile.path.isEmpty // Check if _imageFile is null or its path is empty
                 ? const Text('No image captured')
                 : Image.memory(_imageFile.readAsBytesSync()), // Use Image.memory to display the image
@@ -52,6 +74,17 @@ class _CameraPageState extends State<CameraPage> {
                 _captureImage(ImageSource.gallery);
               },
               child: const Text('Select from Gallery'),
+=======
+            _imageFile == null
+                ? const Text('No image captured')
+                : Image.file(_imageFile!),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                _captureImage();
+              },
+              child: const Text('Open Camera'),
+>>>>>>> Stashed changes
             ),
           ],
         ),
