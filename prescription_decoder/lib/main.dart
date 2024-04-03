@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:prescription_decoder/ui/login.dart';
+import 'package:prescription_decoder/ui/home.dart';
 import 'firebase_options.dart';
 
 void main() {
@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: FutureBuilder(
-        future: _initializeFirebase(),
+        future: _initializeFirebase(),  
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return const HomePage();
+            return const Home();
           }
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: LoginScreen(),
+      body: Home(),
     );
   }
 }

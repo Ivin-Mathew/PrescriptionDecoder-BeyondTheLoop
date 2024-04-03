@@ -42,6 +42,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('New User Registration'),
+        
       ),
       backgroundColor: Colors.white,
       body: ModalProgressHUD(
