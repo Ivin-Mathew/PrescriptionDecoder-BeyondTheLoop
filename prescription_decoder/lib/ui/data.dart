@@ -22,10 +22,13 @@ class _DataState extends State<Data> {
 
   Future<void> _fetchDataFromFirestore() async {
     try {
+      // Fetch only one document from Firestore
       final snapshot = await FirebaseFirestore.instance.collection('Records').limit(1).get();
       if (snapshot.docs.isNotEmpty) {
         final data = snapshot.docs.first.data() as Map<String, dynamic>;
         final imageUrl = data['Url'] as String;
+
+        // Call the method to convert image to text
         await _convertImageToText(imageUrl);
       } else {
         throw Exception('No documents found in Firestore');
@@ -73,6 +76,7 @@ class _DataState extends State<Data> {
         backgroundColor: Colors.blue,
       ),
       body: Center(
+        widthFactor: double.maxFinite,
         child: loading
             ? CircularProgressIndicator()
             : convertedText != null

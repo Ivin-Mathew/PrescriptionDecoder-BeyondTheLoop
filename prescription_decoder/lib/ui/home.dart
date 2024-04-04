@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prescription_decoder/ui/data.dart';
+import 'package:prescription_decoder/ui/scan.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -57,7 +58,10 @@ class _HomeState extends State<Home> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () async {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    /* Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => RealtimeDatabaseInsert()));
+                  }, */
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => Data()));
                   },
                   style: ElevatedButton.styleFrom(

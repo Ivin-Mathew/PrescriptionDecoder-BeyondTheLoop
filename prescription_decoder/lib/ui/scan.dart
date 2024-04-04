@@ -1,134 +1,173 @@
-import 'dart:io'; 
-import 'package:firebase_storage/firebase_storage.dart'; 
-import 'package:image_picker/image_picker.dart'; 
-import 'package:cloud_firestore/cloud_firestore.dart'; 
-import 'package:flutter/material.dart'; 
+import 'dart:io';
 
-class RealtimeDatabaseInsert extends StatefulWidget { 
-  RealtimeDatabaseInsert({Key? key}) : super(key: key); 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart';
+
+class RealtimeDatabaseInsert extends StatefulWidget {
+  RealtimeDatabaseInsert({Key? key}) : super(key: key);
 
   @override
   _RealtimeDatabaseInsertState createState() => _RealtimeDatabaseInsertState();
 }
 
-class _RealtimeDatabaseInsertState extends State<RealtimeDatabaseInsert> { 
-  var nameController = TextEditingController(); 
+class _RealtimeDatabaseInsertState extends State<RealtimeDatabaseInsert> {
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
 
-  
-  final firestore = FirebaseFirestore.instance; 
-  File? _image;
+  File? _photo;
+  final ImagePicker _picker = ImagePicker();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
+
+  Future imgFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future imgFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future uploadFile() async {
+    if (_photo == null) return;
+    final fileName = basename(_photo!.path);
+    final destination = 'files/$fileName';
+
+    try {
+      final ref = firebase_storage.FirebaseStorage.instance
+          .ref(destination)
+          .child('file/');
+      final uploadTask = ref.putFile(_photo!);
+      final snapshot = await uploadTask.whenComplete(() => null);
+
+      // Get the download URL for the image
+      final String downloadUrl = await snapshot.ref.getDownloadURL();
+
+      // Store the image URL, user name, and description into Firestore
+      await FirebaseFirestore.instance.collection('images').add({
+        'imageUrl': downloadUrl,
+        'userName': _nameController.text.trim(),
+        'description': _descriptionController.text.trim(),
+      });
+
+      // Clear the fields after submission
+      _nameController.clear();
+      _descriptionController.clear();
+    } catch (e) {
+      print('error occurred: $e');
+    }
+  }
 
   @override
-  Widget build(BuildContext context) { 
-    return Center( 
-      child: Scaffold( 
-        appBar: AppBar(
-          title: const Text('Upload Prescription'),
+  @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(),
+    body: Column(
+      children: <Widget>[
+        SizedBox(
+          height: 32,
         ),
-        body: SafeArea( 
-          child: SingleChildScrollView( 
-            child: Padding( 
-              padding: const EdgeInsets.all(20.0), 
-              child: Column( 
-                children: [  
-                  Text("Add Data"), 
-                  Container( 
-                    height: 150, 
-                    width: 300, 
-                    decoration: BoxDecoration( 
-                      border: Border.all(color: Colors.black), 
-                      borderRadius: BorderRadius.circular(20), 
-                    ), 
-                    child: Center( 
-                      child: Column( 
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-                        children: [ 
-                          Expanded( 
-                            child: Center( 
-                              child: _image == null 
-                                ? Text('No image selected.') 
-                                : _buildImageWidget(), // Use conditional widget based on platform
-                            ), 
-                          ), 
-                          ElevatedButton( 
-                            onPressed: () async { 
-                              final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-                              if (image != null) { 
-                                setState(() {
-                                  _image = File(image.path); 
-                                });
-                              } 
-                            }, 
-                            child: Text('Select image'), 
-                          ), 
-                        ], 
-                      ), 
-                    ), 
-                  ), 
-                  SizedBox( 
-                    height: 30, 
-                  ), 
-                  SizedBox( 
-                    height: 50, 
-                    child: _image != null
-                      ? _buildImageWidget() // Use conditional widget based on platform
-                      : Container(), // Placeholder when no image is selected
-                  ),
-                  SizedBox( 
-                    height: 20, 
-                  ), 
-                  ElevatedButton( 
-                    onPressed: () async { 
-                      if (_image != null) { 
-                        // Your upload logic goes here 
-                      } else { 
-                        // Show error message if no image is selected 
-                        showDialog( 
-                          context: context, 
-                          builder: (BuildContext context) { 
-                            return AlertDialog( 
-                              title: Text("Error"), 
-                              content: Text("Please select an image."), 
-                              actions: [ 
-                                TextButton( 
-                                  onPressed: () { 
-                                    Navigator.of(context).pop(); 
-                                  }, 
-                                  child: Text("OK"), 
-                                ), 
-                              ], 
-                            ); 
-                          }, 
-                        ); 
-                      } 
-                    }, 
-                    child: Text( 
-                      "Submit Details", 
-                    ), 
-                    style: ElevatedButton.styleFrom( 
-                      backgroundColor: Colors.amber, 
-                      shape: RoundedRectangleBorder( 
-                        borderRadius: BorderRadius.circular(10),
+        Center(
+          child: GestureDetector(
+            onTap: () {
+              _showPicker(context);
+            },
+            child: CircleAvatar(
+              radius: 55,
+              backgroundColor: Color(0xffFDCF09),
+              child: _photo != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: _photo!.path.startsWith('http')
+                          ? Image.network(
+                              _photo!.path,
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.fitHeight,
+                            )
+                          : kIsWeb
+                              ? Image.network(
+                                  _photo!.path,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.fitHeight,
+                                )
+                              : Image.file(
+                                  _photo!,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                    )
+                  : Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(50)),
+                      width: 100,
+                      height: 100,
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.grey[800],
                       ),
                     ),
-                  ),
-                ],
-              ), 
-            ), 
-          ), 
-        ),
-      ),
-    );
-  } 
-
-   Widget _buildImageWidget() {
-  if (Platform.isIOS || Platform.isAndroid) {
-    // Use Image.file for non-web platforms
-    return Image.file(_image!);
-  } else {
-    // Use Image.network for web platform
-    return Image.network(_image!.path);
-  }
+            ),
+          ),
+        )
+      ],
+    ),
+  );
 }
 
+
+  void _showPicker(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Container(
+            child: new Wrap(
+              children: <Widget>[
+                new ListTile(
+                  leading: new Icon(Icons.photo_library),
+                  title: new Text('Gallery'),
+                  onTap: () {
+                    imgFromGallery();
+                    Navigator.of(context).pop();
+                  },
+                ),
+                new ListTile(
+                  leading: new Icon(Icons.photo_camera),
+                  title: new Text('Camera'),
+                  onTap: () {
+                    imgFromCamera();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
