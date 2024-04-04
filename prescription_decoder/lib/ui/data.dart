@@ -83,13 +83,15 @@ class _DataState extends State<Data> {
           },
         ),
       ),
-      body: Center(
-        widthFactor: double.maxFinite,
-        child: loading
-            ? CircularProgressIndicator()
-            : convertedText != null
-                ? Text(convertedText!)
-                : Text('Failed to convert image to text'),
+      body: Container(
+        width: double.infinity, // Ensures the container expands to the full width of the screen
+        child: Center(
+          child: loading
+              ? CircularProgressIndicator()
+              : convertedText != null
+                  ? Text(convertedText!)
+                  : Text('Failed to convert image to text'),
+        ),
       ),
     );
   }
