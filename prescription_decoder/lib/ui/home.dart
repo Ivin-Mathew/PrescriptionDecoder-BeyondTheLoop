@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prescription_decoder/ui/data.dart';
+import 'package:prescription_decoder/ui/medicines.dart';
 import 'package:prescription_decoder/ui/scan.dart';
 
 class Home extends StatefulWidget {
@@ -39,7 +40,8 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle medication button press
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => Medicines()));
                   },
                   child: const Text('Current Medication'),
                 ),

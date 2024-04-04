@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:prescription_decoder/ui/home.dart';
 
 class Data extends StatefulWidget {
   const Data({Key? key}) : super(key: key);
@@ -74,6 +75,13 @@ class _DataState extends State<Data> {
       appBar: AppBar(
         title: const Text('Converted Text'),
         backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => Home()));
+          },
+        ),
       ),
       body: Center(
         widthFactor: double.maxFinite,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:prescription_decoder/ui/home.dart';
+import 'package:prescription_decoder/ui/login.dart';
 import 'firebase_options.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         future: _initializeFirebase(),  
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return const Home();
+            return const LoginScreen();
           }
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
