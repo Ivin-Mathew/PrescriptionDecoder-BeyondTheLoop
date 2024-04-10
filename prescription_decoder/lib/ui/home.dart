@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prescription_decoder/ui/data.dart';
 import 'package:prescription_decoder/ui/medicines.dart';
-import 'package:prescription_decoder/ui/scan.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

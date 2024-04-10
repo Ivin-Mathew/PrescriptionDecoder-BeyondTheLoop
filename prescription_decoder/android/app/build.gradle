@@ -5,7 +5,6 @@ plugins {
     id "com.google.gms.google-services"
 }
 
-// Rest of your code remains unchanged
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -26,8 +25,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.prescription_decoder"
-    compileSdk flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    compileSdk 34
+    ndkVersion '26.2.11394342'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
